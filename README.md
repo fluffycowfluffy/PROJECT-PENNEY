@@ -1,11 +1,13 @@
 # Project Penney
 ### Greta Lin Risgin
+### Automation & Workflows
+### Spring 2025
 
-This repository contains some sample code for the class to use as a starting point. It will be periodically updated as needed but is not meant to contain a completed project at any point. This README is coppied from Professor Smith's original Project Penney GitHub, I will update it to be my own unique README soon.
+NOTE: I have included an initial 100,000 decks within the `deck_storage` folder. However, they are currently compressed. Please unzip this file.
 
 ---
 
-Files included:
+Files included from Professor Smith's Original GitHub:
 
 `src/`
 
@@ -17,6 +19,9 @@ Files included:
 
 - visualization.py: Code related to creating figures should go here. [Not currently included]
 
----
+The pp_greta.py file will generate your heatmaps. It includes the following functions:
+- get_decks()
+- - 
 
-This project is maintained using the [uv package manager](https://docs.astral.sh/uv/).
+
+---
