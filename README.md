@@ -11,7 +11,7 @@ Project Penney generates 100,000 decks per file and calculates the win/loss prob
 
 ---
 
-The `pp_greta.py` file will generate your heatmaps and runs for ~10 minutes to go through 1 million decks. It includes the following functions:
+The `projectpenney_risgin.py` file will generate your heatmaps and runs for ~10 minutes to go through 1 million decks. It includes the following functions:
 - `get_decks()`
   - The inital code from Professor Smith's original GitHub. This function will generate n decks; I have it generating 100,000 decks for each `.npy` file. 
 - `decks_to_npy()`
