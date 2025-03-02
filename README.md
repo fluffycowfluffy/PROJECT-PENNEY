@@ -4,21 +4,10 @@
 ### Spring 2025
 
 **NOTE:** I have included an initial 100,000 decks within the `deck_storage` folder. However, they are currently compressed. Please unzip this file.
+
 **ANOTHER NOTE:** I have to confess I have not been using uv, I just run this out of my own virtual environment. I don't know if that's wrong, but it runs so a win is a win.
 
 ---
-
-Files included from Professor Smith's Original GitHub:
-
-`src/`
-
-- datagen.py: Code related to data generation and storage should go here.
-
-- helpers.py: Helper functions and variables needed across various other modules should go here.
-
-- processing.py: Code related to scoring the games should go here.
-
-- visualization.py: Code related to creating figures should go here. [Not currently included]
 
 The `pp_greta.py` file will generate your heatmaps and runs for ~10 minutes to go through 1 million decks. It includes the following functions:
 - `get_decks()`
