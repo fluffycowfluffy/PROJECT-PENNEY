@@ -1,7 +1,7 @@
 [project]
 name = "projectpenney"
 version = "0.1.0"
-description = "Add your description here"
+description = "Add your description here (WIP I have not changed this yet)"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
