@@ -1,4 +1,5 @@
-## Project Penney
+# Project Penney
+### Greta Lin Risgin
 
 This repository contains some sample code for the class to use as a starting point. It will be periodically updated as needed but is not meant to contain a completed project at any point. This README is coppied from Professor Smith's original Project Penney GitHub, I will update it to be my own unique README soon.
 
