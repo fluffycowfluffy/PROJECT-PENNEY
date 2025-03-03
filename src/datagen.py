@@ -27,7 +27,7 @@ def get_decks(n_decks: int,
 
 def decks_to_npy():
   """
-  save decks to a .npy files
+  Save 100,000 decks to a .npy files
   """
   # generate seed
   seed = random.randint(0, 100)
