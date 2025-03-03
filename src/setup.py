@@ -8,5 +8,8 @@ def import_libs():
   Automated commands written for a
   macOS/Unix environment
   """
-  subprocess.run(["pip", "install", "-r", "requirements.txt"])
-  print("All requirements installed!")
+  try:
+    subprocess.run(["pip", "install", "-r", "requirements.txt"])
+    print("All requirements installed!")
+  except Exception as e:
+    print("Unable to install requirements from requirements.txt")
