@@ -19,7 +19,9 @@ More About Project Penney
 ---
 Project Penney includes the following Python files:
 - `main.py`
-  - The main function calls `create_heatmap` and runs for ~10 minutes. Heatmaps will be stored in the `visualizations` folder created by the same function.
+  - The main function calls `import_libs` and `create_heatmap` and runs for ~10 minutes. Heatmaps will be stored in the `visualizations` folder created by the same function.
+- `setup.py`
+  - `import_libs`: Automates the importation of required libraries via subprocess
 - `helpers.py`
   - This is the original debugger factory code from Professor Smith 
 - `processors.py`
