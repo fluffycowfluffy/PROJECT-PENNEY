@@ -35,7 +35,7 @@ def decks_to_npy():
    save decks to a .npy files
    """
    # generate seed
-   seed = random.randint(0,100)
+   seed = random.randint(0, 100)
 
    # generate the decks
    my_decks = get_decks(100000, seed)
@@ -43,7 +43,7 @@ def decks_to_npy():
 
    # create folder and make sure path exists
    storage_dir = os.path.join(os.getcwd(), "deck_storage") 
-   os.makedirs(storage_dir, exist_ok=True)
+   os.makedirs(storage_dir, exist_ok = True)
 
    # save decks to .npy file
    file_path = os.path.join("deck_storage", f"my_decks_{seed}.npy")
