@@ -8,6 +8,8 @@ Project Penney generates 100,000 decks per file and calculates the win/loss prob
 Project Penney includes the following Python files:
 - `main.py`
   - The main function calls `create_heatmap` and runs for ~10 minutes. Heatmaps will be stored in the `visualizations` folder created by the same function.
+- `helpers.py`
+  - This is the original debugger factory code from Professor Smith 
 - `processors.py`
   - `get_decks`: The initial code from Professor Smith's original GitHub. This function will generate n decks; it will generate 100,000 decks for each `.npy` file, which are created and saved in the next function. 
   - `decks_to_npy`: This function will save your generated decks to  `.npy` files. It will generate a new random seed for each round of decks and save the file to the `deck_storage` folder. Each deck file will be named accordingly with its corresponding random seed.
