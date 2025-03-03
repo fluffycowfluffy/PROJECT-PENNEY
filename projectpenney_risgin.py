@@ -42,7 +42,7 @@ def decks_to_npy():
    my_decks_array = np.asarray(my_decks)
 
    # create folder and make sure path exists
-   storage_dir = os.path.join(os.getcwd(), "deck_storage")  # Absolute path to the current working directory
+   storage_dir = os.path.join(os.getcwd(), "deck_storage") 
    os.makedirs(storage_dir, exist_ok=True)
 
    # save decks to .npy file
