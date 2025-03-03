@@ -9,7 +9,7 @@ Quick Start
 ---
 Run the following in command line in order to clone this repository.
 ```
-git clone https://github.com/fluffycowfluffy
+git clone https://github.com/fluffycowfluffy/PROJECT-PENNEY
 ```
 Then run the main function
 ```
