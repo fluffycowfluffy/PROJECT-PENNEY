@@ -7,7 +7,7 @@ Project Penney generates 100,000 decks per file and calculates the win/loss prob
 ---
 Quick Start
 ---
-Run the following in command line in order to clone this repository within your virtual environment.
+Run the following in command line in order to clone this repository.
 ```
 git clone https://github.com/fluffycowfluffy
 ```
