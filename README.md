@@ -18,5 +18,5 @@ The `projectpenney_risgin.py` file will generate your heatmaps and runs for ~10 
   - This function is what will be called in the main function. It creates two heatmaps for wins AND losses probabilities, therefore draw probability can be inferred. Heatmaps are created using `seaborn`. 
   - **NOTE:** Reminder to comeback and edit the code so that it generates one output with both heatmaps side by side instead of two separate heatmap files.
  
-The `viz examples` folder has examples of how your heatmaps should come out after a 1 million deck run. The cmaps can be changed in for different aesthetic choices, currently they are set to green corresponding with wins and orange/reddish corresponding with losses.
+- The `viz examples` folder has examples of how your heatmaps should come out after a 1 million deck run. The cmaps can be changed in for different aesthetic choices, currently they are set to green corresponding with wins and orange/reddish corresponding with losses.
 ---
