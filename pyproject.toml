@@ -1,8 +1,7 @@
 [project]
-name = "projectpenney"
+name = "Project Penney: Greta Lin Risgin"
 version = "0.1.0"
-description = "Add your description here (WIP I have not changed this yet)"
-readme = "README.md"
+description = "Project Penney generates 100,000 decks per file and calculates the win/loss probability for player 1 versus player 2 based on all combinations of card sequences. This data is used to create two heatmaps: a win probability heatmap and a loss probability heatmap. The code runs for ~10 minutes for 1 million decks. Every 100,000 deck NumPy file is ~ 40 MB."
 requires-python = ">=3.12"
 dependencies = [
     "matplotlib>=3.10.0",
