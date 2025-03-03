@@ -21,8 +21,10 @@ def get_decks(n_decks: int,
        decks (np.nd.array): 2D array of shape (n_decks, num_cards),
        each row is a shuffled deck
     """
-    init_deck = [1]*half_deck_size + [0]*half_deck_size # Create the initial deck: half 1's and half 0's
-    decks = np.tile(init_deck, (n_decks, 1)) # repeat the inital deck n_decks times
+    # create the initial deck: half 1's and half 0's
+    init_deck = [1]*half_deck_size + [0]*half_deck_size
+    # repeat the initial deck n_decks times
+    decks = np.tile(init_deck, (n_decks, 1)) 
     rng = np.random.default_rng(seed)
     rng.permuted(decks, 
                  axis=1, 
@@ -59,13 +61,13 @@ def penneys_game(P1: list, # store data
    for a match to the players' sequences
    if the player sequence matches the last three, this player gets a trick
    """
-   # numpy array to story data for win frequency calculation
+   # numpy array to store data for win frequency calculation
    win_frequency = np.zeros(3)
 
    # list for trick data
    trick_check = []
 
-   # our directory to the decks
+   # directory to the decks
    directory = "deck_storage"
 
    # length for calculating win rate
