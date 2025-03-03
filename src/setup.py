@@ -8,9 +8,8 @@ def import_libs():
   Automated commands written for a
   macOS/Unix environment
   """
-  out = subprocess.run(["pip", "install", "-r", "requirements.txt"])
+  subprocess.run(["pip", "install", "-r", "requirements.txt"])
   # ans = subprocess.run(["python", "--version"], text = True)
-  print("out")
   print("All requirements installed")
 
 if __name__ == "__main__":
