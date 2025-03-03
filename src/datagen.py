@@ -1,5 +1,5 @@
-import numpy as np
 import os
+import numpy as np
 from src.helpers import PATH_DATA
 
 HALF_DECK_SIZE = 26
