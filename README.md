@@ -35,6 +35,7 @@ Project Penney includes the following Python files:
   - **NOTE:** Reminder to come back and edit the code so that it generates one output with both heatmaps side by side instead of two separate heatmap files.
 - All Python files besides `main.py` are stored in the `src` folder. 
 - The `visualization examples` folder has examples of how your heatmaps should come out after a 1 million deck run. The cmaps can be changed in for different aesthetic choices, currently, they are set to green corresponding with wins, and orange/reddish corresponding with losses.
+- `requirements.txt` and `pyproject.toml` both contain information for the required Python libraries for this project
 
 **Current targeted areas of improvement:** 
 1. Fixing possible bugs with `.npy` file naming.
