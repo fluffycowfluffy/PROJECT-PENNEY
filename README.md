@@ -8,7 +8,7 @@ Project Penney generates 100,000 decks per file and calculates the win/loss prob
 
 The `projectpenney_risgin.py` file will generate your heatmaps and runs for ~10 minutes to go through 1 million decks. It includes the following functions:
 - `get_decks()`
-  - The inital code from Professor Smith's original GitHub. This function will generate n decks; I have it generating 100,000 decks for each `.npy` file. 
+  - The inital code from Professor Smith's original GitHub. This function will generate n decks; it will generate 100,000 decks for each `.npy` file, which are created and saved in the next function. 
 - `decks_to_npy()`
   - This function will save your generated decks to  `.npy` files. It will generate a new random seed for each round of decks and save the file to the `deck_storage` folder. Each deck file will be named accordingly with its corresponding random seed.
   - **NOTE:** I believe there is a 1% chance that the same random seed will be generated twice. Reminder to come back and troubleshoot for potential naming errors from this.
@@ -18,9 +18,5 @@ The `projectpenney_risgin.py` file will generate your heatmaps and runs for ~10 
   - This function is what will be called in the main function. It creates two heatmaps for wins AND losses probabilities, therefore draw probability can be inferred. Heatmaps are created using `seaborn`. 
   - **NOTE:** Reminder to comeback and edit the code so that it generates one output with both heatmaps side by side instead of two separate heatmap files.
  
-The `viz examples` folder has examples of how your heatmaps should come out after a 1 million deck run. You can mess around with the cmaps if you like and make them any color you'd like, but I chose green to correspond with winning and orange/reddish to correspond with losses.
-
-The `src` folder has the original `.py` files from Professor Smith's original GitHub. I did not include the `uv.lock` file from the original GitHub because I have not been using uv (; —_—)
-
-yay enjoy the heatmaps :)
+The `viz examples` folder has examples of how your heatmaps should come out after a 1 million deck run. The cmaps can be changed in for different aesthetic choices, currently they are set to green corresponding with wins and orange/reddish corresponding with losses.
 ---
