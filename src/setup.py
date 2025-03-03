@@ -9,4 +9,7 @@ def import_libs():
   macOS/Unix environment
   """
   subprocess.run("pip install -r requirements.txt")
-  return None
+  print("All requirements installed")
+
+if __name__ == "__main__":
+  import_libs()
