@@ -15,6 +15,6 @@ def import_libs():
                    stderr = sp.PIPE) # stderr captures diagnostic information to this file
     print("All requirements installed!")
   except sp.CalledProcessError as e:
-    print(f"Unable to install all requirements from requirements.txt due to error {e}")
+    print(f"Unable to install all requirements from requirements.txt due to error: {e}")
   except Exception as e:
-    print(f"Unable to install all requirements from requirements.txt due to unexpected error {e}")
+    print(f"Unable to install all requirements from requirements.txt due to unexpected error: {e}")
