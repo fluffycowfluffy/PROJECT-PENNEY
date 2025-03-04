@@ -19,7 +19,7 @@ def create_heatmap():
 
    # as one group 10 100,000 decks has already been provided
    # this has been set to run 9 times in order to result in a final count of 1,000,000 decks
-   for i in range(9):
+   for i in range(1):
     decks_to_npy()
 
    # try deck.index() where deck str
@@ -51,8 +51,10 @@ def create_heatmap():
    np.fill_diagonal(penney_prob_arr_losses, np.nan)
 
    # make sure data are floats so the heatmap can be generated
-   penney_prob_arr_wins = penney_prob_arr_wins.astype(float)
-   penney_prob_arr_losses = penney_prob_arr_losses.astype(float)
+   # penney_prob_arr_wins = penney_prob_arr_wins.astype(float)
+   # penney_prob_arr_losses = penney_prob_arr_losses.astype(float)
+
+   fig, (ax1, ax2) = plt.subplots(1, 2, figsize = (15, 5))
 
    # create my wins heatmap :)
    ax1 = plt.axes()
@@ -63,8 +65,8 @@ def create_heatmap():
    ax1.set_xticklabels(sequences)
    ax1.set_yticklabels(sequences)
    ax1.set_title("Probabilities of P1 Winning Against P2", fontsize = 20)
-   ax1.set_ylabel("P1 Sequences", fontsize = 15)
-   ax1.set_xlabel("P2 Sequences", fontsize = 15)
+   ax1.set_ylabel("P1 Sequences", fontsize = 12)
+   ax1.set_xlabel("P2 Sequences", fontsize = 12)
    # save the win heatmap to the visualization folder
    heatmap_path_wins = os.path.join(viz_directory, "penneys_prob_heatmap_wins.png")
    plt.savefig(heatmap_path_wins, dpi = 400)
@@ -83,9 +85,14 @@ def create_heatmap():
    ax2.set_title("Probabilities of P1 Losing Against P2", fontsize = 20)
    ax2.set_ylabel("P1 Sequences", fontsize = 15)
    ax2.set_xlabel("P2 Sequences", fontsize = 15)
+
+   plt.tight_layout
+   
    # save the loss heat to the visualization folder
-   heatmap_path_losses = os.path.join(viz_directory, "penneys_prob_heatmap_losses.png")
+   heatmap_path_losses = os.path.join(viz_directory, "penneys_prob_heatmaps_w-l.png")
    plt.savefig(heatmap_path_losses, dpi = 400)
+
+   plt.close()
 
    # show the final probability arrays
    print(penney_prob_arr_wins)
