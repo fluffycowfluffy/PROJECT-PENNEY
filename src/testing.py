@@ -18,7 +18,7 @@ def fig_tester():
   plt.subplot(1, 2, 2)
   plt.plot(x, y)
   
-  testfig_path = os.join.path(viz_directory, "test.png")
+  testfig_path = os.path.join(viz_directory, "test.png")
   plt.savefig(testfig_path, dpi=400)
 
   return None
