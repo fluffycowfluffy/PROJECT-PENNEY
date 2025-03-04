@@ -9,7 +9,12 @@ def import_libs():
   macOS/Unix environment
   """
   try:
-    if subprocess.run(["pip", "install", "-r", "requirements.txt"]):
-      print("All requirements installed!")
+    subprocess.run(["pip", "install", "-r", "requirements.txt"],
+                   check =  True, # flag possible errors with installation
+                   stdout = subprocess.PIPE, # stdout captures output to this file
+                   stderr = subprocess.PIPE) # stderr captures diagnostic information to this file
+    print("All requirements installed!")
+  except CalledProcessError as e:
+    print(f"Unable to install all requirements from requirements.txt due to error {e}")
   except Exception as e:
-    print("Unable to install requirements from requirements.txt")
+    print(f"Unable to install all requirements from requirements.txt due to unexpected error {e}")
