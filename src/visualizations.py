@@ -54,32 +54,24 @@ def create_heatmap():
    # penney_prob_arr_wins = penney_prob_arr_wins.astype(float)
    # penney_prob_arr_losses = penney_prob_arr_losses.astype(float)
 
-   # fig, (ax1, ax2) = plt.subplots(1, 2, figsize = (15, 5))
-
    # create my wins heatmap :)
    ax1 = plt.axes()
-   # my_heatmap_wins = 
    sns.heatmap(penney_prob_arr_wins,
-                          ax = ax1, 
-                          annot = True, 
-                          cmap = "YlGn")
+              ax = ax1, 
+              annot = True, 
+              cmap = "Reds")
    ax1.set_xticklabels(sequences)
    ax1.set_yticklabels(sequences)
    ax1.set_title("Probabilities of P1 Winning Against P2", fontsize = 20)
    ax1.set_ylabel("P1 Sequences", fontsize = 12)
    ax1.set_xlabel("P2 Sequences", fontsize = 12)
    # save the win heatmap to the visualization folder
-   # heatmap_path_wins = os.path.join(viz_directory, "penneys_prob_heatmap_wins.png")
-   plt.subplot(1, 2, 1)
-   # plt.savefig(heatmap_path_wins, dpi = 400)
+   heatmap_path_wins = os.path.join(viz_directory, "penneys_prob_heatmap_wins.png")
+   plt.savefig(heatmap_path_wins, dpi = 400)
 
-   # clear the figure
-   # plt.clf()
-
-   # losses heatmap
+   # create losses heatmap
    ax2 = plt.axes()
-   # my_heatmap_losses = 
-   sns.heatmap(penney_prob_arr_losses,
+   my_heatmap_losses = sns.heatmap(penney_prob_arr_losses,
                           ax = ax2, 
                           annot = True, 
                           cmap = "YlOrBr")
@@ -89,14 +81,9 @@ def create_heatmap():
    ax2.set_ylabel("P1 Sequences", fontsize = 15)
    ax2.set_xlabel("P2 Sequences", fontsize = 15)
    # save the loss heat to the visualization folder
-   # heatmap_path_losses = os.path.join(viz_directory, "penneys_prob_heatmaps_w-l.png")
-   plt.subplot(1, 2, 2)
-   # plt.savefig(heatmap_path_losses, dpi = 400)
+   heatmap_path_losses = os.path.join(viz_directory, "penneys_prob_heatmaps_w-l.png")
+   plt.savefig(heatmap_path_losses, dpi = 400)
 
-   plt.tight_layout
-   heatmap_path_w_l = os.path.join(viz_directory, "penneys_prob_heatmaps_w-l.png")
-   plt.savefig(heatmap_path_w_l, dpi = 400)
-   
    plt.close()
 
    # show the final probability arrays
