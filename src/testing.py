@@ -1,88 +1,101 @@
 import os
 import numpy as np
-import seaborn as sns
 from tqdm import tqdm
+import seaborn as sns
+import subprocess as sp
 import matplotlib.pyplot as plt
-from concurrent.futures import ThreadPoolExecutor  # Parallelization
 
 from src.datagen import decks_to_npy
 from src.processing import penneys_game
 from src.helpers import PATH_DATA
 
-def calculate_probabilities(i, j, sequences, penney_prob_arr_wins, penney_prob_arr_losses):
-    """
-    Function to calculate and store the win/loss probability for a given i, j combination.
-    """
+def create_heatmap():
+  """
+  Generate a heatmap from the probabilities 
+  found in the penneys_game() function
+  """
+  # as one group 10 100,000 decks has already been provided
+  # this has been set to run 9 times in order to result in a final count of 1,000,000 decks
+  for i in range(1):
+    decks_to_npy()
+
+  sequences = ['000','001','010','011','100','101','110', '111']
+  n = len(sequences)
+
+  # create empty array
+  penney_prob_arr_wins = np.zeros((n,n))
+  penney_prob_arr_losses = np.zeros((n,n))
+
+  print("Calculating probabilities...generating heatmaps...")
+  # iterate twice over sequences; create progress bar
+  for i in tqdm(range(n)):
     P1 = list(map(int, sequences[i]))
-    P2 = list(map(int, sequences[j]))
-    win_rate = penneys_game(P1, P2)
-    penney_prob_arr_wins[i, j] = win_rate[0]
-    penney_prob_arr_losses[i, j] = win_rate[1]
+    for j in range(n):
+      # create all possible sequences for players 1 and 2 so they may be
+      # used in the penneys_game() function as list objects
+      P2 = list(map(int, sequences[j]))
+      # save win rate to variable
+      win_rate = penneys_game(P1, P2)
+      # fill dataframe with combonation data 
+      # for each sequence played against another
+      penney_prob_arr_wins[i,j] = win_rate[0]
+      penney_prob_arr_losses[i,j] = win_rate[1]
 
-def fig_tester():
-    """
-    Generate a heatmap from the probabilities 
-    found in the penneys_game() function
-    """
-    for i in range(8):
-        decks_to_npy()
+  # set the diagonal to NaNs for masking purposes
+  np.fill_diagonal(penney_prob_arr_wins, np.nan)
+  np.fill_diagonal(penney_prob_arr_losses, np.nan)
 
-    sequences = ['000', '001', '010', '011', '100', '101', '110', '111']
-    n = len(sequences)
+  # create folder and define directory for generated visualizations
+  viz_directory = os.path.join(os.getcwd(), "visualizations")
+  os.makedirs(viz_directory, exist_ok = True)
 
-    # create empty array
-    penney_prob_arr_wins = np.zeros((n, n))
-    penney_prob_arr_losses = np.zeros((n, n))
+  # create plt figure
+  plt.figure(figsize = (14, 7))
+  
+  # create wins heatmap :)
+  # set to first position in joint visualization
+  plt.subplot(1, 2, 1)
+  ax1 = sns.heatmap(penney_prob_arr_wins,
+                    annot = True, 
+                    cmap = "Reds")
+  plt.xticks(ticks = np.arange(len(sequences)), labels = sequences)
+  plt.yticks(ticks = np.arange(len(sequences)), labels = sequences)
+  plt.title("Probabilities of P1 Winning Against P2", fontsize = 16)
+  plt.ylabel("P1 Sequences", fontsize = 12)
+  plt.xlabel("P2 Sequences", fontsize = 12)
+  ax1.set_aspect("equal")
+  
+  # create losses heatmap
+  # set to second position in joint visualization
+  plt.subplot(1, 2, 2)
+  ax2 = sns.heatmap(penney_prob_arr_losses,
+                    annot = True, 
+                    cmap = "Blues")
+  plt.xticks(ticks = np.arange(len(sequences)), labels = sequences)
+  plt.yticks(ticks = np.arange(len(sequences)), labels = sequences)
+  plt.title("Probabilities of P1 Losing Against P2", fontsize = 16)
+  plt.ylabel("P1 Sequences", fontsize = 12)
+  plt.xlabel("P2 Sequences", fontsize = 12)
+  ax2.set_aspect("equal")
 
-    print("Calculating probabilities...generating heatmaps...")
+  # save to visualizations folder
+  heatmap_w_l_path = os.path.join(viz_directory, "PenneyProbabilityHeatmap.png")
+  plt.savefig(heatmap_w_l_path, dpi=400)
 
-    # Use ThreadPoolExecutor for parallelization
-    with ThreadPoolExecutor() as executor:
-        # Use a nested loop but submit each combination to be processed in parallel
-        futures = [
-            executor.submit(calculate_probabilities, i, j, sequences, penney_prob_arr_wins, penney_prob_arr_losses)
-            for i in range(n) for j in range(n)
-        ]
-        # Wait for all futures to complete
-        for future in tqdm(futures, desc="Processing", total=len(futures)):
-            future.result()  # This will block until the task is complete
+  # close the figure window
+  plt.close()
+  # card illustration directory
+  card_directory = os.path.join(os.getcwd(), "cards_ascii")
+  card_path = os.path.join(card_directory, f"cards_1.txt")
 
-    # set the diagonal to NaNs for masking purposes
-    np.fill_diagonal(penney_prob_arr_wins, np.nan)
-    np.fill_diagonal(penney_prob_arr_losses, np.nan)
+  # show completion message
+  try: 
+    sp.run(["cat", card_path])
+  except Exception as e:
+    pass
+  print(f"Heatmaps saved to {heatmap_w_l_path}")
 
-    # create folder and define directory for generated visualizations
-    viz_directory = os.path.join(os.getcwd(), "visualizations")
-    os.makedirs(viz_directory, exist_ok=True)
-
-    # Create the figure for the heatmaps
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 7))  # 1 row, 2 columns
-
-    # Create wins heatmap :)
-    sns.heatmap(penney_prob_arr_wins, annot=True, cmap="Reds", ax=ax1)
-    ax1.set_xticklabels(sequences)
-    ax1.set_yticklabels(sequences)
-    ax1.set_title("Probabilities of P1 Winning Against P2", fontsize=16)
-    ax1.set_ylabel("P1 Sequences", fontsize=12)
-    ax1.set_xlabel("P2 Sequences", fontsize=12)
-    ax1.set_aspect('equal')  # Set the aspect ratio to be equal (square)
-
-    # Create losses heatmap
-    sns.heatmap(penney_prob_arr_losses, annot=True, cmap="Greys", ax=ax2)
-    ax2.set_xticklabels(sequences)
-    ax2.set_yticklabels(sequences)
-    ax2.set_title("Probabilities of P1 Losing Against P2", fontsize=16)
-    ax2.set_ylabel("P1 Sequences", fontsize=12)
-    ax2.set_xlabel("P2 Sequences", fontsize=12)
-    ax2.set_aspect('equal')  # Set the aspect ratio to be equal (square)
-
-    # Save to visualizations folder
-    heatmap_w_l_path = os.path.join(viz_directory, "PenneyProbabilityHeatmap.png")
-    plt.savefig(heatmap_w_l_path, dpi=400)
-
-    # Close the plot after saving
-    plt.close()
-
+  return None
     print(f"Heatmaps saved to: {heatmap_w_l_path}")
 
     return None
