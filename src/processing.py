@@ -23,7 +23,7 @@ def penneys_game(P1: list, # store data
   # length for calculating win rate
   N = 0
 
-  # loop through decks in the deck_storage folder and count the length of each one for stoarge in the N variable                  
+  # loop through decks in the deck_storage folder and count the length of each one for storage in the N variable                  
   deck_arrays = [file for file in os.listdir(deck_directory)if file.endswith(".npy")]
   for deck_array in deck_arrays:
     file_path = os.path.join(deck_directory, deck_array)
