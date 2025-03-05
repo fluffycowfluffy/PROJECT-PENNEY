@@ -38,6 +38,7 @@ Project Penney includes the following Python files:
 - `requirements.txt` and `pyproject.toml` both contain information for the required Python libraries for this project
 
 **Current targeted areas of improvement:** 
-1. Fixing possible bugs with `.npy` file naming.
-2. After messing around with directories within the code, there was one run where it was noticeably faster than previous runs. I was unable to replicate this, however, I would like to look into seeing if the use of `os` is affecting runtime.
+1. Fixing possible bugs with `.npy` file naming, and standardize random seeds generated so every cloned git starts with the same seeds.
+2. Speed up the code.
+3. Add code for win/loss probablity based on overall card count, not just tricks.
 ---
