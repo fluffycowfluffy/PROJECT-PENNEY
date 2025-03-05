@@ -24,7 +24,7 @@ def fig_tester():
     Generate a heatmap from the probabilities 
     found in the penneys_game() function
     """
-    for i in range(1):
+    for i in range(8):
         decks_to_npy()
 
     sequences = ['000', '001', '010', '011', '100', '101', '110', '111']
