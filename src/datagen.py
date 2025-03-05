@@ -28,7 +28,7 @@ def get_decks(n_decks: int,
 
 def decks_to_npy():
   """
-  Save 100,000 decks to a .npy files
+  Save 100,000 decks to a .npy file
   """
   # generate seed
   seed = random.randint(0, 100)
@@ -37,10 +37,7 @@ def decks_to_npy():
   my_decks = get_decks(100000, seed)
   my_decks_array = np.asarray(my_decks)
   
-  # go one level above src in order to save .npy files in the main project penney folder
-  # root_directory = os.path.abspath(os.path.join(os.getcwd(), ".."))
   # create folder and make sure path exists
-  # deck_directory = os.path.join(root_directory, "deck_storage")
   deck_directory = os.path.join(os.getcwd(), "deck_storage") 
   os.makedirs(deck_directory, exist_ok = True)
   
@@ -49,7 +46,8 @@ def decks_to_npy():
   np.save(file_path, my_decks_array)
   
   # check function is saving decks correctly
-  sp.run(["cat", "cards_loading_screen.txt"])
   print(f"Decks saved to: {file_path} with random seed {seed}")
-  # try: 
-  # subprocess.run(["cat", "cards_loading_screen.txt"])
+  try: 
+    sp.run(["cat", "cards_loading_screen.txt"])
+  except Exception as e:
+    continue
