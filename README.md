@@ -3,7 +3,7 @@
 ### Automation & Workflows
 ### Spring 2025
 ---
-Project Penney generates 100,000 decks per file and calculates the win/loss probability for player 1 versus player 2 based on all combinations of card sequences. This data is used to create two heatmaps: a win probability heatmap and a loss probability heatmap. The code runs for ~10 minutes for 1 million decks on my local device. However, I have noticed longer runtimes after being cloned to other new devices. I would like to be able to optimize my code to run much faster for this large number of decks. Every 100,000 deck NumPy file is ~ 40 MB. An initial 100,000 decks with random seed 15 have been uploaded to the `deck_storage` folder. I think some areas to target could reducing use of for loops, as well as perhaps finding a more optimal way to store these large amounts of data.
+Project Penney generates 100,000 decks per file and calculates the win/loss probability for player 1 versus player 2 based on all combinations of card sequences. This data is used to create two heatmaps: a win probability heatmap and a loss probability heatmap. The code runs for ~10 minutes for 1 million decks on my local device. However, I have noticed longer runtimes after being cloned to other devices. I would like to be able to optimize my code to run much faster for this large number of decks. Every 100,000 deck NumPy file is ~ 40 MB. An initial 100,000 decks with random seed 42 have been uploaded to the `deck_storage` folder. I think some areas to target could reducing use of for loops, as well as perhaps finding a more optimal way to store these large amounts of data.
 ---
 Quick Start
 ---
@@ -34,11 +34,10 @@ Project Penney includes the following Python files:
   - `create_heatmap`: This function is what will be called in the main function. It creates two heatmaps for wins AND losses probabilities, therefore draw probability can be inferred. Heatmaps are created using `seaborn`. 
   - **NOTE:** Reminder to come back and edit the code so that it generates one output with both heatmaps side by side instead of two separate heatmap files.
 - All Python files besides `main.py` are stored in the `src` folder. 
-- The `visualization examples` folder has examples of how your heatmaps should come out after a 1 million deck run. The cmaps can be changed in for different aesthetic choices, currently, they are set to green corresponding with wins, and orange/reddish corresponding with losses.
+- The `visualization examples` folder has examples of how your heatmaps should come out after a 1 million deck run. The cmaps can be changed in for different aesthetic choices, currently, they are set to reds corresponding with wins, and blues corresponding with losses.
 - `requirements.txt` and `pyproject.toml` both contain information for the required Python libraries for this project
 
 **Current targeted areas of improvement:** 
 1. Fixing possible bugs with `.npy` file naming.
-2. Generating both heatmaps into one visualization for conciseness.
-3. After messing around with directories within the code, there was one run where it was noticeably faster than previous runs. I was unable to replicate this, however, I would like to look into seeing if the use of `os` is affecting runtime.
+2. After messing around with directories within the code, there was one run where it was noticeably faster than previous runs. I was unable to replicate this, however, I would like to look into seeing if the use of `os` is affecting runtime.
 ---
