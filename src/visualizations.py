@@ -19,7 +19,7 @@ def create_heatmap():
 
    # as one group 10 100,000 decks has already been provided
    # this has been set to run 9 times in order to result in a final count of 1,000,000 decks
-   for i in range(1):
+   for i in range(10):
     decks_to_npy()
 
    # try deck.index() where deck str
