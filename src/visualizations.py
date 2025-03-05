@@ -9,7 +9,7 @@ from src.datagen import decks_to_npy
 from src.processing import penneys_game
 from src.helpers import PATH_DATA
 
-def fig_tester():
+def create_heatmap():
   """
   Generate a heatmap from the probabilities 
   found in the penneys_game() function
