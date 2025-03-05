@@ -1,101 +1,77 @@
 import os
 import numpy as np
-from tqdm import tqdm
 import seaborn as sns
-import subprocess as sp
+from tqdm import tqdm
 import matplotlib.pyplot as plt
-
 from src.datagen import decks_to_npy
 from src.processing import penneys_game
 from src.helpers import PATH_DATA
 
-def create_heatmap():
-  """
-  Generate a heatmap from the probabilities 
-  found in the penneys_game() function
-  """
-  # as one group 10 100,000 decks has already been provided
-  # this has been set to run 9 times in order to result in a final count of 1,000,000 decks
-  for i in range(1):
-    decks_to_npy()
+def fig_tester():
+    """
+    Generate a heatmap from the probabilities 
+    found in the penneys_game() function
+    """
+    for i in range(1):
+        decks_to_npy()
 
-  sequences = ['000','001','010','011','100','101','110', '111']
-  n = len(sequences)
+    sequences = ['000', '001', '010', '011', '100', '101', '110', '111']
+    n = len(sequences)
 
-  # create empty array
-  penney_prob_arr_wins = np.zeros((n,n))
-  penney_prob_arr_losses = np.zeros((n,n))
+    # Convert sequences to integer lists once outside the loop
+    sequence_ints = [list(map(int, seq)) for seq in sequences]
 
-  print("Calculating probabilities...generating heatmaps...")
-  # iterate twice over sequences; create progress bar
-  for i in tqdm(range(n)):
-    P1 = list(map(int, sequences[i]))
-    for j in range(n):
-      # create all possible sequences for players 1 and 2 so they may be
-      # used in the penneys_game() function as list objects
-      P2 = list(map(int, sequences[j]))
-      # save win rate to variable
-      win_rate = penneys_game(P1, P2)
-      # fill dataframe with combonation data 
-      # for each sequence played against another
-      penney_prob_arr_wins[i,j] = win_rate[0]
-      penney_prob_arr_losses[i,j] = win_rate[1]
+    # Create empty arrays for wins and losses probabilities
+    penney_prob_arr_wins = np.zeros((n, n))
+    penney_prob_arr_losses = np.zeros((n, n))
 
-  # set the diagonal to NaNs for masking purposes
-  np.fill_diagonal(penney_prob_arr_wins, np.nan)
-  np.fill_diagonal(penney_prob_arr_losses, np.nan)
+    print("Calculating probabilities...generating heatmaps...")
 
-  # create folder and define directory for generated visualizations
-  viz_directory = os.path.join(os.getcwd(), "visualizations")
-  os.makedirs(viz_directory, exist_ok = True)
+    # Iterate over the sequences and calculate win/loss probabilities
+    for i in tqdm(range(n), desc="Progressing P1 Sequences"):
+        P1 = sequence_ints[i]  # Use pre-converted sequence for P1
+        for j in range(n):
+            P2 = sequence_ints[j]  # Use pre-converted sequence for P2
+            win_rate = penneys_game(P1, P2)
+            penney_prob_arr_wins[i, j] = win_rate[0]
+            penney_prob_arr_losses[i, j] = win_rate[1]
 
-  # create plt figure
-  plt.figure(figsize = (14, 7))
-  
-  # create wins heatmap :)
-  # set to first position in joint visualization
-  plt.subplot(1, 2, 1)
-  ax1 = sns.heatmap(penney_prob_arr_wins,
-                    annot = True, 
-                    cmap = "Reds")
-  plt.xticks(ticks = np.arange(len(sequences)), labels = sequences)
-  plt.yticks(ticks = np.arange(len(sequences)), labels = sequences)
-  plt.title("Probabilities of P1 Winning Against P2", fontsize = 16)
-  plt.ylabel("P1 Sequences", fontsize = 12)
-  plt.xlabel("P2 Sequences", fontsize = 12)
-  ax1.set_aspect("equal")
-  
-  # create losses heatmap
-  # set to second position in joint visualization
-  plt.subplot(1, 2, 2)
-  ax2 = sns.heatmap(penney_prob_arr_losses,
-                    annot = True, 
-                    cmap = "Blues")
-  plt.xticks(ticks = np.arange(len(sequences)), labels = sequences)
-  plt.yticks(ticks = np.arange(len(sequences)), labels = sequences)
-  plt.title("Probabilities of P1 Losing Against P2", fontsize = 16)
-  plt.ylabel("P1 Sequences", fontsize = 12)
-  plt.xlabel("P2 Sequences", fontsize = 12)
-  ax2.set_aspect("equal")
+    # Set the diagonal to NaNs for masking purposes
+    np.fill_diagonal(penney_prob_arr_wins, np.nan)
+    np.fill_diagonal(penney_prob_arr_losses, np.nan)
 
-  # save to visualizations folder
-  heatmap_w_l_path = os.path.join(viz_directory, "PenneyProbabilityHeatmap.png")
-  plt.savefig(heatmap_w_l_path, dpi=400)
+    # Create folder and define directory for generated visualizations
+    viz_directory = os.path.join(os.getcwd(), "visualizations")
+    os.makedirs(viz_directory, exist_ok=True)
 
-  # close the figure window
-  plt.close()
-  # card illustration directory
-  card_directory = os.path.join(os.getcwd(), "cards_ascii")
-  card_path = os.path.join(card_directory, f"cards_1.txt")
+    # Create the figure for the heatmaps
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 7))  # 1 row, 2 columns
 
-  # show completion message
-  try: 
-    sp.run(["cat", card_path])
-  except Exception as e:
-    pass
-  print(f"Heatmaps saved to {heatmap_w_l_path}")
+    # Create wins heatmap
+    sns.heatmap(penney_prob_arr_wins, annot=True, cmap="Reds", ax=ax1)
+    ax1.set_xticklabels(sequences)
+    ax1.set_yticklabels(sequences)
+    ax1.set_title("Probabilities of P1 Winning Against P2", fontsize=16)
+    ax1.set_ylabel("P1 Sequences", fontsize=12)
+    ax1.set_xlabel("P2 Sequences", fontsize=12)
+    ax1.set_aspect('equal')  # Set the aspect ratio to be equal (square)
 
-  return None
+    # Create losses heatmap
+    sns.heatmap(penney_prob_arr_losses, annot=True, cmap="Greys", ax=ax2)
+    ax2.set_xticklabels(sequences)
+    ax2.set_yticklabels(sequences)
+    ax2.set_title("Probabilities of P1 Losing Against P2", fontsize=16)
+    ax2.set_ylabel("P1 Sequences", fontsize=12)
+    ax2.set_xlabel("P2 Sequences", fontsize=12)
+    ax2.set_aspect('equal')  # Set the aspect ratio to be equal (square)
+
+    # Save to visualizations folder
+    heatmap_w_l_path = os.path.join(viz_directory, "PenneyProbabilityHeatmap.png")
+    plt.savefig(heatmap_w_l_path, dpi=400)
+
+    # Close the plot after saving
+    plt.close()
+
     print(f"Heatmaps saved to: {heatmap_w_l_path}")
 
     return None
