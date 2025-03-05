@@ -13,8 +13,12 @@ def import_libs():
                    check =  True, # flag possible errors with installation
                    stdout = sp.PIPE, # stdout captures output to this file
                    stderr = sp.PIPE) # stderr captures diagnostic information to this file
+    sp.run(["cat", "cards_loading_screen.txt")
     print("All requirements installed!")
   except sp.CalledProcessError as e:
     print(f"Unable to install all requirements from requirements.txt due to error: {e}")
   except Exception as e:
     print(f"Unable to install all requirements from requirements.txt due to unexpected error: {e}")
+
+if __name__ == "__main__":
+  import_libs()
