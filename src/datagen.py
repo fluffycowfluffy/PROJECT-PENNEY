@@ -48,7 +48,7 @@ def decks_to_npy():
 
   ### code for the ascii art loading screen:
   # generate seed to iterate through card txt files
-  card_seed = random.randint(1, 5)
+  card_seed = random.randint(1, 6)
 
   # folder for cards loading screen and create it if it doesn't exist to avoid issues
   card_directory = os.path.join(os.getcwd(), "cards_ascii")
