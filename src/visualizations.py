@@ -29,10 +29,10 @@ def create_heatmap():
   print("Calculating probabilities...generating heatmaps...")
   # iterate twice over sequences; create progress bar
   for i in tqdm(range(n)):
+    P1 = list(map(int, sequences[i]))
     for j in range(n):
       # create all possible sequences for players 1 and 2 so they may be
       # used in the penneys_game() function as list objects
-      P1 = list(map(int, sequences[i]))
       P2 = list(map(int, sequences[j]))
       # save win rate to variable
       win_rate = penneys_game(P1, P2)
