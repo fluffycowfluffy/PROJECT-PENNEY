@@ -50,7 +50,7 @@ def fig_tester():
   os.makedirs(viz_directory, exist_ok = True)
 
   # create plt figure
-  plt.figure(figsize = (14, 7))
+  plt.figure(figsize = (16, 8))
   
   # create wins heatmap :)
   # set to first position in joint visualization
@@ -69,7 +69,7 @@ def fig_tester():
   plt.subplot(1, 2, 2)
   sns.heatmap(penney_prob_arr_losses,
               annot = True, 
-              cmap = "Greys")
+              cmap = "Blues")
   plt.xticks(ticks = np.arange(len(sequences)), labels = sequences)
   plt.yticks(ticks = np.arange(len(sequences)), labels = sequences)
   plt.title("Probabilities of P1 Losing Against P2", fontsize = 16)
