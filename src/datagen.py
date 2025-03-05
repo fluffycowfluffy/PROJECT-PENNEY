@@ -52,4 +52,4 @@ def decks_to_npy():
   sp.run(["cat", "cards_loading_screen.txt"])
   print(f"Decks saved to: {file_path} with random seed {seed}")
   # try: 
-  subprocess.run(["cat", "cards_loading_screen.txt"])
+  # subprocess.run(["cat", "cards_loading_screen.txt"])
