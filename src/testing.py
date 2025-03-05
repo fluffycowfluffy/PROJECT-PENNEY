@@ -1,7 +1,8 @@
 import os
 import numpy as np
-import seaborn as sns
 from tqdm import tqdm
+import seaborn as sns
+import subprocess as sp
 import matplotlib.pyplot as plt
 
 from src.datagen import decks_to_npy
@@ -47,37 +48,51 @@ def fig_tester():
   # create folder and define directory for generated visualizations
   viz_directory = os.path.join(os.getcwd(), "visualizations")
   os.makedirs(viz_directory, exist_ok = True)
+
+  # create plt figure
+  plt.figure(figsize = (14, 7))
   
   # create wins heatmap :)
-  ax1 = plt.axes()
-  my_heatmap_wins = sns.heatmap(penney_prob_arr_wins,
-                                ax = ax1, 
-                                annot = True, 
-                                cmap = "Reds")
-  ax1.set_xticklabels(sequences)
-  ax1.set_yticklabels(sequences)
-  ax1.set_title("Probabilities of P1 Winning Against P2", fontsize = 16)
-  ax1.set_ylabel("P1 Sequences", fontsize = 12)
-  ax1.set_xlabel("P2 Sequences", fontsize = 12)
   # set to first position in joint visualization
   plt.subplot(1, 2, 1)
+  sns.heatmap(penney_prob_arr_wins,
+              ax = ax1, 
+              annot = True, 
+              cmap = "Reds")
+  plt.xticks(ticks = np.arange(len(sequences)), labels = sequences)
+  plt.yticks(ticks = np.arange(len(sequences)), labels = sequences)
+  plt.title("Probabilities of P1 Winning Against P2", fontsize = 16)
+  plt.ylabel("P1 Sequences", fontsize = 12)
+  plt.xlabel("P2 Sequences", fontsize = 12)
   
   # create losses heatmap
-  ax2 = plt.axes()
-  my_heatmap_losses = sns.heatmap(penney_prob_arr_losses,
-                          ax = ax2, 
-                          annot = True, 
-                          cmap = "YlOrBr")
-  ax2.set_xticklabels(sequences)
-  ax2.set_yticklabels(sequences)
-  ax2.set_title("Probabilities of P1 Losing Against P2", fontsize = 16)
-  ax2.set_ylabel("P1 Sequences", fontsize = 12)
-  ax2.set_xlabel("P2 Sequences", fontsize = 12)
-  # set to first position in joint visualization
+  # set to second position in joint visualization
   plt.subplot(1, 2, 2)
+  sns.heatmap(penney_prob_arr_losses,
+              ax = ax2, 
+              annot = True, 
+              cmap = "Greys")
+  plt.xticks(ticks = np.arange(len(sequences)), labels = sequences)
+  plt.yticks(ticks = np.arange(len(sequences)), labels = sequences)
+  plt.title("Probabilities of P1 Losing Against P2", fontsize = 16)
+  plt.ylabel("P1 Sequences", fontsize = 12)
+  plt.xlabel("P2 Sequences", fontsize = 12)
 
   # save to visualizations folder
   heatmap_w_l_path = os.path.join(viz_directory, "PenneyProbabilityHeatmap.png")
   plt.savefig(heatmap_w_l_path, dpi=400)
+
+  # close the figure window
+  plt.close()
+  # card illustration directory
+  card_directory = os.path.join(os.getcwd(), "cards_ascii")
+  card_path = os.path.join(card_directory, f"cards_1.txt")
+
+  # show completion message
+  try: 
+    sp.run(["cat", card_path])
+  except Exception as e:
+    pass
+  print(f"Heatmaps saved to {heatmap_w_l_path}")
 
   return None
