@@ -50,31 +50,33 @@ def fig_tester():
   os.makedirs(viz_directory, exist_ok = True)
 
   # create plt figure
-  plt.figure(figsize = (16, 8))
+  plt.figure(figsize = (14, 7))
   
   # create wins heatmap :)
   # set to first position in joint visualization
   plt.subplot(1, 2, 1)
-  sns.heatmap(penney_prob_arr_wins,
-              annot = True, 
-              cmap = "Reds")
+  ax1 = sns.heatmap(penney_prob_arr_wins,
+                    annot = True, 
+                    cmap = "Reds")
   plt.xticks(ticks = np.arange(len(sequences)), labels = sequences)
   plt.yticks(ticks = np.arange(len(sequences)), labels = sequences)
   plt.title("Probabilities of P1 Winning Against P2", fontsize = 16)
   plt.ylabel("P1 Sequences", fontsize = 12)
   plt.xlabel("P2 Sequences", fontsize = 12)
+  ax1.set_aspect("equal")
   
   # create losses heatmap
   # set to second position in joint visualization
   plt.subplot(1, 2, 2)
-  sns.heatmap(penney_prob_arr_losses,
-              annot = True, 
-              cmap = "Blues")
+  ax2 = sns.heatmap(penney_prob_arr_losses,
+                    annot = True, 
+                    cmap = "Blues")
   plt.xticks(ticks = np.arange(len(sequences)), labels = sequences)
   plt.yticks(ticks = np.arange(len(sequences)), labels = sequences)
   plt.title("Probabilities of P1 Losing Against P2", fontsize = 16)
   plt.ylabel("P1 Sequences", fontsize = 12)
   plt.xlabel("P2 Sequences", fontsize = 12)
+  ax2.set_aspect("equal")
 
   # save to visualizations folder
   heatmap_w_l_path = os.path.join(viz_directory, "PenneyProbabilityHeatmap.png")
