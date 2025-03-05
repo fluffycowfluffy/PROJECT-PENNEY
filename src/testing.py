@@ -56,7 +56,6 @@ def fig_tester():
   # set to first position in joint visualization
   plt.subplot(1, 2, 1)
   sns.heatmap(penney_prob_arr_wins,
-              ax = ax1, 
               annot = True, 
               cmap = "Reds")
   plt.xticks(ticks = np.arange(len(sequences)), labels = sequences)
@@ -69,7 +68,6 @@ def fig_tester():
   # set to second position in joint visualization
   plt.subplot(1, 2, 2)
   sns.heatmap(penney_prob_arr_losses,
-              ax = ax2, 
               annot = True, 
               cmap = "Greys")
   plt.xticks(ticks = np.arange(len(sequences)), labels = sequences)
