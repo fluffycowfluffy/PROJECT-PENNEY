@@ -1,6 +1,7 @@
 import os
 import random
 import numpy as np
+import subprocess
 
 from src.helpers import PATH_DATA
 
@@ -49,3 +50,5 @@ def decks_to_npy():
   
   # check function is saving decks correctly
   print(f"Decks saved to: {file_path} with random seed {seed}")
+  # try: 
+  subprocess.run(["cat", "cards_loading_screen"])
