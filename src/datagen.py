@@ -30,24 +30,36 @@ def decks_to_npy():
   """
   Save 100,000 decks to a .npy file
   """
+  ### code for decks:
   # generate seed
-  seed = random.randint(0, 100)
+  deck_seed = random.randint(0, 100)
   
   # generate the decks
-  my_decks = get_decks(100000, seed)
+  my_decks = get_decks(100000, deck_seed)
   my_decks_array = np.asarray(my_decks)
   
   # create folder and make sure path exists
   deck_directory = os.path.join(os.getcwd(), "deck_storage") 
   os.makedirs(deck_directory, exist_ok = True)
-  
+
   # save decks to .npy file
-  file_path = os.path.join(deck_directory, f"my_decks_{seed}.npy")
-  np.save(file_path, my_decks_array)
+  deck_path = os.path.join(deck_directory, f"my_decks_{deck_seed}.npy")
+  np.save(deck_path, my_decks_array)
+
+  ### code for the ascii art loading screen:
+  # generate seed to iterate through card txt files
+  card_seed = random.randint(1, 5)
+
+  # folder for cards loading screen and create it if it doesn't exist to avoid issues
+  card_directory = os.path.join(os.getcwd(), "cards_ascii")
+  os.makedirs(card_directory, exist_ok = True)
+
+  # navigate to varying card pictures for the loading screen
+  card_path = os.path.join(card_directory, f"cards_{card_seed}.txt")
   
   # check function is saving decks correctly
-  print(f"Decks saved to: {file_path} with random seed {seed}")
+  print(f"Decks saved to: {deck_path} with random seed {deck_seed}")
   try: 
-    sp.run(["cat", "cards_loading_screen.txt"])
+    sp.run(["cat", card_path])
   except Exception as e:
-    print(f"Loading...")
+    print("Loading...")
