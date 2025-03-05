@@ -50,5 +50,4 @@ def decks_to_npy():
   try: 
     sp.run(["cat", "cards_loading_screen.txt"])
   except Exception as e:
-        print(f"Loading...")
-        continue 
+    print(f"Loading...")
