@@ -39,6 +39,7 @@ Project Penney includes the following Python files:
 
 **Current targeted areas of improvement:** 
 1. Fixing possible bugs with `.npy` file naming, and standardize random seeds generated so every cloned git starts with the same seeds.
-2. Speed up the code.
-3. Add code for win/loss probablity based on overall card count, not just tricks.
+2. Make it easy for users can add more decks of any amount they want
+3. Speed up the code.
+4. Add code for win/loss probablity based on overall card count, not just tricks.
 ---
