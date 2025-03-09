@@ -3,7 +3,7 @@ import random
 import numpy as np
 import subprocess as sp
 
-from src.helpers import PATH_DATA
+from helpers import PATH_DATA
 
 HALF_DECK_SIZE = 26
 
@@ -35,7 +35,7 @@ def decks_to_npy():
   deck_seed = random.randint(0, 100)
   
   # generate the decks
-  my_decks = get_decks(100000, deck_seed)
+  my_decks = get_decks(1, deck_seed)
   my_decks_array = np.asarray(my_decks)
   
   # create folder and make sure path exists
@@ -63,3 +63,6 @@ def decks_to_npy():
     sp.run(["cat", card_path])
   except Exception as e:
     print("Loading...")
+
+if __name__ == "__main__":
+  decks_to_npy()
