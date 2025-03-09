@@ -62,7 +62,7 @@ def decks_to_npy():
   try: 
     sp.run(["cat", card_path])
   except Exception as e:
-    print("Loading...")
+    pass
 
 if __name__ == "__main__":
   decks_to_npy()
