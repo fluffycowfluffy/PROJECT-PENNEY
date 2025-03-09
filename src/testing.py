@@ -4,7 +4,7 @@ import numpy as np
 from src.helpers import PATH_DATA
 
 def penneys_game(P1: list, # store data
-                 P2: list):
+                 P2: list) -> array:
   """
   Loop through each card in the deck,
   save these cards to a list where the final three cards care always being checked
@@ -12,10 +12,11 @@ def penneys_game(P1: list, # store data
   if the player sequence matches the last three, this player gets a trick
   """
   # numpy array to store data for win frequency calculation
-  win_frequency = np.zeros(3)
+  win_frequency_tricks = np.zeros(3)
+  win_frequency_cards = np.zeros(3)
   
-  # list for trick data
-  trick_check = []
+  # list for trick/card data
+  deck_check = []
   
   # making sure it can find the correct directory path to the decks
   deck_directory = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "deck_storage")
@@ -34,29 +35,48 @@ def penneys_game(P1: list, # store data
     # store tricks counts for player 1 and 2 for future calculations
     P1_tricks = 0
     P2_tricks = 0
+    # store card counts for player 1 and 2 for future calculations
+    P1_cards = 0
+    P2_cards = 0
   
     for deck in decks:
        for card in deck:
-          trick_check.append(card)
-          if len(trick_check) >= 3:
-             if trick_check[-3:] == P1:
+          deck_check.append(card)
+          if len(deck_check) >= 3:
+             if deck_check[-3:] == P1:
                 P1_tricks += 1
-                trick_check = []
-             elif trick_check[-3:] == P2:
+                P1_cards += len(deck_check)
+                deck_check = []
+             elif deck_check[-3:] == P2:
                 P2_tricks += 1
-                trick_check = []
-       # calculate win frequency
+                P2_cards += len(deck_check)
+                deck_check = []
+       # calculate win frequency for tricks
        if P1_tricks > P2_tricks:
-          win_frequency[0] += 1
-       elif P2_tricks > P1_tricks:
-          win_frequency[1] += 1
+          win_frequency_tricks[0] += 1
+       elif P1_tricks < P2_tricks:
+          win_frequency_tricks[1] += 1
        elif P1_tricks == P2_tricks:
-          win_frequency[2] += 1
-       # reset trick check and trick counts after each deck
-       trick_check = []
+          win_frequency_tricks[2] += 1
+       # calculate win frequency for card count
+       if P1_cards > P2_cards:
+           win_frequency_cards[0] += 1
+       elif P1_cards < P2_cards:
+           win_frequency_cards[1] += 1
+       elif P1_cards == P2_cards:
+           win_frequency_cards[2] += 1
+       # reset deck_check and trick/card counts after each deck
+       deck_check = []
        P1_tricks = 0
        P2_tricks = 0
+       P1_cards = 0
+       P2_cards = 0
   
-  # calculate win rate
-  win_rate = win_frequency*1.0/N
+  # calculate win rate and store both to arrays
+  win_rate_tricks = win_frequency_tricks*1.0/N
+  win_rate_cards = win_frequency_cards*1.0/N
+  win_rate = np.array([win_rate_tricks, win_rate_cards])
   return win_rate
+
+if __name__ == "__main__":
+  penneys_game([0,0,0], [1,0,0])
