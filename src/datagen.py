@@ -59,6 +59,7 @@ def decks_to_npy():
   
   # check function is saving decks correctly
   print(f"Decks saved to: {deck_path} with random seed {deck_seed}")
+  print(my_decks)
   try: 
     sp.run(["cat", card_path])
   except Exception as e:
