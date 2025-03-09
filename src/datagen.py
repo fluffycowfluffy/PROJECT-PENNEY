@@ -51,11 +51,11 @@ def decks_to_npy():
   card_seed = random.randint(1, 6)
 
   # folder for cards loading screen and create it if it doesn't exist to avoid issues
-  card_directory = os.path.join(os.getcwd(), "cards_ascii")
-  os.makedirs(card_directory, exist_ok = True)
+  #card_directory = os.path.join(os.getcwd(), "cards_ascii")
+  #os.makedirs(card_directory, exist_ok = True)
 
   # navigate to varying card pictures for the loading screen
-  card_path = os.path.join(card_directory, f"cards_{card_seed}.txt")
+  #card_path = os.path.join(card_directory, f"cards_{card_seed}.txt")
   
   # check function is saving decks correctly
   print(f"Decks saved to: {deck_path} with random seed {deck_seed}")
