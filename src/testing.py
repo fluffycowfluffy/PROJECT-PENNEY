@@ -19,7 +19,8 @@ def penneys_game(P1: list, # store data
   deck_check = []
   
   # making sure it can find the correct directory path to the decks
-  deck_directory = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "deck_storage")
+  #deck_directory = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "deck_storage")
+  deck_directory = os.path.join(os.path.dirname(os.path.abspath(__file__)), "deck_storage")
   
   # length for calculating win rate
   N = 0
