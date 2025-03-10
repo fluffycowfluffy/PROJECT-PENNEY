@@ -4,7 +4,7 @@ import numpy as np
 from helpers import PATH_DATA
 
 def penneys_game(P1: list, # store data
-                 P2: list) -> array:
+                 P2: list) -> np.ndarray:
   """
   Loop through each card in the deck,
   save these cards to a list where the final three cards care always being checked
