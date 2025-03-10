@@ -51,13 +51,13 @@ def penneys_game(P1: list, # store data
                 #print(f" P1 trick count: {P1_tricks}")
                 P1_cards += len(deck_check)
                 #print(f" P1 card count: {P1_cards}")
-                deck_check = []
+                #deck_check = []
              elif deck_check[-3:] == P2:
                 P2_tricks += 1
                 #print(f" P2 trick count: {P2_tricks}")
                 P2_cards += len(deck_check)
                 #print(f" P2 card count:{P2_cards}")
-                deck_check = []
+                #deck_check = []
        # calculate win frequency for tricks
        if P1_tricks > P2_tricks:
           win_frequency_tricks[0] += 1
@@ -84,6 +84,8 @@ def penneys_game(P1: list, # store data
   win_rate_cards = win_frequency_cards*1.0/N
   win_rate = np.array([win_rate_tricks, win_rate_cards])
   #print(win_rate)
+  deck_int_list = [int(x) for x in deck_deck]
+  print(deck_int_list)
   print(deck_check)
   #return win_rate
 
