@@ -41,7 +41,9 @@ def penneys_game(P1: list, # store data
     P2_cards = 0
   
     for deck in decks:
+      print(deck)
        for card in deck:
+         print(card)
           deck_check.append(card)
           if len(deck_check) >= 3:
              if deck_check[-3:] == P1:
