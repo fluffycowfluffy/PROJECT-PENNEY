@@ -1,7 +1,7 @@
 import os
 import numpy as np
 
-from src.helpers import PATH_DATA
+from helpers import PATH_DATA
 
 def penneys_game(P1: list, # store data
                  P2: list) -> array:
@@ -45,11 +45,15 @@ def penneys_game(P1: list, # store data
           if len(deck_check) >= 3:
              if deck_check[-3:] == P1:
                 P1_tricks += 1
+                print(f" P1 trick count: {P1_tricks}")
                 P1_cards += len(deck_check)
+                print(f" P1 card count: {P1_cards}")
                 deck_check = []
              elif deck_check[-3:] == P2:
                 P2_tricks += 1
+                print(f" P2 trick count: {P2_tricks}")
                 P2_cards += len(deck_check)
+                print(f" P2 card count:{P2_cards}")
                 deck_check = []
        # calculate win frequency for tricks
        if P1_tricks > P2_tricks:
