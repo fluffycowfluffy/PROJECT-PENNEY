@@ -84,7 +84,7 @@ def penneys_game(P1: list, # store data
   win_rate_cards = win_frequency_cards*1.0/N
   win_rate = np.array([win_rate_tricks, win_rate_cards])
   #print(win_rate)
-  deck_int_list = [int(x) for x in deck_deck]
+  deck_int_list = [int(x) for x in deck_check]
   print(deck_int_list)
   print(deck_check)
   #return win_rate
