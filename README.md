@@ -42,4 +42,5 @@ Project Penney includes the following Python files:
 2. Make it easy for users can add more decks of any amount they want
 3. Speed up the code.
 4. Add code for win/loss probablity based on overall card count, not just tricks.
+5. Make sure heatmap includes the sample size
 ---
