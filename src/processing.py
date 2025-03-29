@@ -3,6 +3,24 @@ import numpy as np
 
 from src.helpers import PATH_DATA
 
+def total_deck_count() -> int:
+   # making sure it can find the correct directory path to the decks
+   deck_directory = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "deck_storage")
+
+   # length for calculating win rate
+   N = 0
+
+   # loop through decks in the deck_storage folder and count the length of each one for storage in the N variable                  
+   deck_arrays = [file for file in os.listdir(deck_directory)if file.endswith(".npy")]
+   for deck_array in deck_arrays:
+      file_path = os.path.join(deck_directory, deck_array)
+      # load the data; pickled objects are allowed in order to load the array .npy files in the folder
+      decks = np.load(file_path, allow_pickle = True)
+      N += len(decks)
+
+   return N
+
+
 def penneys_game(P1: list, # store data
                  P2: list):
   """
@@ -21,7 +39,7 @@ def penneys_game(P1: list, # store data
   deck_directory = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "deck_storage")
   
   # length for calculating win rate
-  N = 0
+  N = total_deck_count()
 
   # loop through decks in the deck_storage folder and count the length of each one for storage in the N variable                  
   deck_arrays = [file for file in os.listdir(deck_directory)if file.endswith(".npy")]
@@ -29,7 +47,7 @@ def penneys_game(P1: list, # store data
     file_path = os.path.join(deck_directory, deck_array)
     # load the data; pickled objects are allowed in order to load the array .npy files in the folder
     decks = np.load(file_path, allow_pickle = True)
-    N += len(decks)
+    #N += len(decks)
 
     # store tricks counts for player 1 and 2 for future calculations
     P1_tricks = 0

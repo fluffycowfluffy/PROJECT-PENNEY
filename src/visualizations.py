@@ -6,7 +6,7 @@ import subprocess as sp
 import matplotlib.pyplot as plt
 
 from src.datagen import decks_to_npy
-from src.processing import penneys_game
+from src.processing import penneys_game, total_deck_count
 from src.helpers import PATH_DATA
 
 def create_heatmap():
@@ -14,10 +14,9 @@ def create_heatmap():
   Generate a heatmap from the probabilities 
   found in the penneys_game() function
   """
-  # as one group 10 100,000 decks has already been provided
-  # this has been set to run 9 times in order to result in a final count of 1,000,000 decks
-  for i in range(9):
-    decks_to_npy()
+  # as 1,000,000 decks have already been provided
+  # this prompts users to enter more decks if they so choose
+  decks_to_npy()
 
   sequences = ['000','001','010','011','100','101','110', '111']
   n = len(sequences)
@@ -49,18 +48,21 @@ def create_heatmap():
   viz_directory = os.path.join(os.getcwd(), "visualizations")
   os.makedirs(viz_directory, exist_ok = True)
 
-  # create plt figure
+  ### create plt figure (tricks)
   plt.figure(figsize = (14, 7))
+  plt.suptitle(f"Penney's Game Win/Loss Percentages by Tricks (N = {total_deck_count()})", fontsize = 16)
   
   # create wins heatmap :)
   # set to first position in joint visualization
   plt.subplot(1, 2, 1)
   ax1 = sns.heatmap(penney_prob_arr_wins,
                     annot = True, 
-                    cmap = "Reds")
-  plt.xticks(ticks = np.arange(len(sequences)), labels = sequences)
-  plt.yticks(ticks = np.arange(len(sequences)), labels = sequences)
-  plt.title("Probabilities of P1 Winning Against P2", fontsize = 16)
+                    cmap = "Reds",
+                    fmt = ".1%",
+                    cbar = False)
+  plt.xticks(ticks = np.arange(len(sequences)), labels = ['RRR','RRB','RBR','RBB','BRR','BRB','BBR', 'BBB'])
+  plt.yticks(ticks = np.arange(len(sequences)), labels = ['RRR','RRB','RBR','RBB','BRR','BRB','BBR', 'BBB'])
+  plt.title("Probabilities of P1 Winning Against P2", fontsize = 12)
   plt.ylabel("P1 Sequences", fontsize = 12)
   plt.xlabel("P2 Sequences", fontsize = 12)
   ax1.set_aspect("equal")
@@ -70,16 +72,21 @@ def create_heatmap():
   plt.subplot(1, 2, 2)
   ax2 = sns.heatmap(penney_prob_arr_losses,
                     annot = True, 
-                    cmap = "Blues")
-  plt.xticks(ticks = np.arange(len(sequences)), labels = sequences)
-  plt.yticks(ticks = np.arange(len(sequences)), labels = sequences)
-  plt.title("Probabilities of P1 Losing Against P2", fontsize = 16)
+                    cmap = "Blues",
+                    fmt = ".1%",
+                    cbar = False)
+  plt.xticks(ticks = np.arange(len(sequences)), labels = ['RRR','RRB','RBR','RBB','BRR','BRB','BBR', 'BBB'])
+  plt.yticks(ticks = np.arange(len(sequences)), labels = ['RRR','RRB','RBR','RBB','BRR','BRB','BBR', 'BBB'])
+  plt.title("Probabilities of P1 Losing Against P2", fontsize = 12)
   plt.ylabel("P1 Sequences", fontsize = 12)
   plt.xlabel("P2 Sequences", fontsize = 12)
   ax2.set_aspect("equal")
 
   # save to visualizations folder
-  heatmap_w_l_path = os.path.join(viz_directory, "PenneyProbabilityHeatmap.png")
+  _,_,files = next(os.walk(viz_directory))
+  viz_increment = len(files)
+  print(viz_increment)
+  heatmap_w_l_path = os.path.join(viz_directory, f"PenneyProbabilityHeatmapTricks_{viz_increment}.png")
   plt.savefig(heatmap_w_l_path, dpi=400)
 
   # close the figure window
