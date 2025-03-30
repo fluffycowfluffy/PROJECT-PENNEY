@@ -19,7 +19,6 @@ def total_deck_count() -> int:
       # load the data; pickled objects are allowed in order to load the array .npy files in the folder
       decks = np.load(file_path, allow_pickle = True)
       N += len(decks)
-
    return N
 
 
