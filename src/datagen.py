@@ -26,7 +26,7 @@ def get_decks(n_decks: int,
   rng.permuted(decks, axis=1, out=decks) # each slice along the axis of 1 is shuffled independently
   return decks
 
-def decks_to_npy():
+def decks_to_npy() -> None:
   """
   Save decks to .npy file
   """
@@ -80,3 +80,4 @@ def decks_to_npy():
     print("Continuing on to calculations...")
   elif(more_decks != "Y" and more_decks != "N"):
     print("Invalid input. Continuing on to calculations...")
+  return None
