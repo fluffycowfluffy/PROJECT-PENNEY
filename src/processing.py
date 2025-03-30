@@ -100,10 +100,10 @@ def penneys_game(P1: list, # store data
    win_rate = win_frequency*1.0/N
    return win_rate
 
-def data_storage() -> tuple[np.ndarray, np.ndarray]:
+def data_storage() -> tuple:
   """
-  Generate a heatmap from the probabilities 
-  found in the penneys_game() function by tricks
+  Generate arrays from the probabilities 
+  found in the penneys_game() function by tricks/cards
   """
   # as 1,000,000 decks have already been provided
   # this prompts users to enter more decks if they so choose
