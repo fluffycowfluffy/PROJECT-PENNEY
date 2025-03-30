@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 from src.processing import total_deck_count, data_storage
 from src.helpers import PATH_DATA
 
-def create_tricks_heatmap(win_loss_tuple: tuple):
+def create_tricks_heatmap(win_loss_tuple: tuple) -> None:
   # create folder and define directory for generated visualizations
   viz_directory = os.path.join(os.getcwd(), "visualizations")
   os.makedirs(viz_directory, exist_ok = True)
@@ -73,7 +73,7 @@ def create_tricks_heatmap(win_loss_tuple: tuple):
   print(f"Heatmaps saved to {heatmap_w_l_path}")
   return None
 
-def create_cards_heatmap(win_loss_tuple: tuple):
+def create_cards_heatmap(win_loss_tuple: tuple) -> None:
   # create folder and define directory for generated visualizations
   viz_directory = os.path.join(os.getcwd(), "visualizations")
   os.makedirs(viz_directory, exist_ok = True)
