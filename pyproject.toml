@@ -1,7 +1,7 @@
 [project]
 name = "Project Penney: Greta Lin Risgin"
 version = "0.1.0"
-description = "Project Penney generates 100,000 decks per file and calculates the win/loss probability for player 1 versus player 2 based on all combinations of card sequences. This data is used to create two heatmaps: a win probability heatmap and a loss probability heatmap. The code runs for ~10 minutes for 1 million decks. Every 100,000 deck NumPy file is ~ 40 MB."
+description = "Penney's Game is a game where two players select a binary sequence. When using a coin this would be heads and tails, while for cards this would be red and black cards. For this project, Project Penney, we will be using a sequence of three and decks of cards encoded in binary. Project Penney calculates the win/loss probability for player 1 versus player 2 based on all combinations of card sequences. This data is used to create four heatmaps: a win probability heatmap and a loss probability heatmap for both games by tricks (number of sequences) and games by total card count. The code runs for ~10 minutes for 1 million decks on my local device. However, I have noticed longer runtimes after being cloned to other devices. A sample size of 1,000,000 decks with random seeds 0, 1, 2, 3, and 4 have been provided within the `deck_storage` folder."
 requires-python = ">=3.12"
 dependencies = [
     "matplotlib==3.10.1",
